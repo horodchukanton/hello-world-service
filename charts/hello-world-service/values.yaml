@@ -1,0 +1,12 @@
+replicaCount: 1
+
+image:
+  repository: horodchukanton/hello-world-service
+  tag: latest
+
+service:
+  type: ClusterIP
+
+traefik:
+  enabled: true
+  host: hello-world-service.local

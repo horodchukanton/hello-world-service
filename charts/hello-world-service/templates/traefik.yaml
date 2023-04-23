@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "hello-world-service.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "hello-world-service.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`{{ .Values.traefik.host }}`)
+      kind: Rule
+      services:
+        - name: {{ include "hello-world-service.fullname" . }}
+          port: http
